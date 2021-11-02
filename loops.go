@@ -2,21 +2,20 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func Sqrt(x float64) float64 {
-	z := 1.0
-	for i := 0; i < 10; i++ {
+	for z := 1.0; ; {
+		state := z
 		z -= (z*z - x) / (2 * z)
-		fmt.Println(z)
+		if float32(state) == float32(z) {
+			return z
+		}
 	}
-
-	return z
 }
 
 func main() {
-	for i := 1.0; i < 4; i++ {
-		fmt.Println("calculating Sqrt of ", i)
-		fmt.Println(Sqrt(i))
-	}
+	p := float64(0.000001)
+	fmt.Println(Sqrt(p), Sqrt(p) == math.Sqrt(p))
 }
